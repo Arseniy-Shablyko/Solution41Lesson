@@ -1,29 +1,42 @@
-#include <iostream>
-#include <ctime>
-using namespace std;
+#include "logic.h"
 
 #define SIZE 10
 #define MAX_MARK 10
+#define MIN_MARK 0
 
 int main() {
-	int marks[SIZE];
+	int marksA[SIZE];
+	int marksB[SIZE];
+	int marksC[SIZE];
 
-	for (int i = 0; i < SIZE; i++) {
-		marks[i] = rand() % (MAX_MARK + 1);
+	init(marksA, SIZE, MIN_MARK, MAX_MARK);
+	init(marksB, SIZE, MIN_MARK, MAX_MARK);
+	init(marksC, SIZE, MIN_MARK, MAX_MARK);
+
+	cout << "A marks: ";
+	cout << convert(marksA, SIZE) << endl;
+	cout << "B marks: ";
+	cout << convert(marksB, SIZE) << endl;
+	cout << "C marks: ";
+	cout << convert(marksC, SIZE) << endl;
+
+	double avgA = calculate_avg_mark(marksA, SIZE);
+	double avgB = calculate_avg_mark(marksB, SIZE);
+	double avgC = calculate_avg_mark(marksC, SIZE);
+
+	cout << "Averege A mark " << avgA << endl;
+	cout << "Averege B mark " << avgB << endl;
+	cout << "Averege C mark " << avgC << endl;
+
+	if ((avgA > avgC) && (avgA > avgB)) {
+		cout << "A";
 	}
-
-	cout << "Student's marks: ";
-	for (int i = 0; i < SIZE; i++) {
-		cout << marks[i] << " ";
+	else if(avgC > avgB){
+		cout << "C";
 	}
-
-	double avg = 0;
-	for (int i = 0; i < SIZE; i++) {
-		avg += marks[i];
+	else {
+		cout << "B";
 	}
-
-	avg = avg / SIZE;
-	cout << "\nAverage mark is " << avg << endl;
 
 	return 0;
 }
